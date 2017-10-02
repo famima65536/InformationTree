@@ -16,14 +16,26 @@ class Server
     loop do
       Thread.start(gs.accept) do | server |
         print(server, " is accepted\n")
-        server.write('perfect!')
+        server.write('hello')
+        loop do
+          line = server.readline.strip
+          case line
+            when 'articles'
+              pass_articles(server)
+            else
+              p line # for debug
+          end
+        end
+
       end
     end
 
   end
 
-  def pass_articles
-
+  # Send articles to client
+  # @return [void]
+  def pass_articles(server)
+    server.write('ARTICLES')
   end
 
   def close
