@@ -1,5 +1,5 @@
 
-
+require 'socket'
 
 class Client
 
@@ -9,7 +9,9 @@ class Client
 
 
   def connect
-
+    socket = TCPSocket.open(@address, 6532)
+    socket.write('test')
+    p socket.receive(20)
   end
 
 
