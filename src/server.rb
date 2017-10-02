@@ -9,12 +9,17 @@ class Server
   end
 
   def open
-    TCPServer.new(nil, 6532) { | server |
-      socket = TCPSocket.new(*server, addr, values_at(3,1))
-      client = server.accept
-      client.write 'test'
-      p socket.receive(10)
-    }
+    gs = TCPServer.open(nil, 6532)
+    addr = gs.addr
+    addr.shift
+
+    loop do
+      Thread.start(gs.accept) do | server |
+        print(server, " is accepted\n")
+        server.write('perfect!')
+      end
+    end
+
   end
 
   def pass_articles
