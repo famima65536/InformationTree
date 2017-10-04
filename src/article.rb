@@ -11,5 +11,9 @@ class Article
   def add_tag(tag)
     @tag << tag
   end
-  
+
+  def to_s
+    "#{@title} : #{@head}"
+  end
+
 end

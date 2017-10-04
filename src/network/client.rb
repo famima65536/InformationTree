@@ -3,8 +3,8 @@ require 'socket'
 
 class Client
 
-  def initialize (host_address)
-    @address = host_address
+  def initialize (host_address = nil)
+    @address = host_address.nil? ? '127.0.0.1' : host_address
   end
 
 
@@ -21,6 +21,14 @@ class Client
 
   def receive_articles
 
+  end
+
+  def running?
+    true
+  end
+
+  def set_main(main)
+    @main = main
   end
 
 end
